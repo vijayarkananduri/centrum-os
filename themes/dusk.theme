@@ -1,0 +1,11 @@
+# Centrum OS — Dusk Theme
+# Calm, winding down, focused
+# Primary: Dark Turquoise (#00CED1)
+# Secondary: Medium Purple (#9370DB)
+# Background: Midnight Blue (#191970)
+
+export THEME_PRIMARY="\033[38;2;0;206;209m"    # Dark Turquoise
+export THEME_SECONDARY="\033[38;2;147;112;219m" # Medium Purple
+export THEME_BG="\033[48;2;25;25;112m"         # Midnight Blue
+export THEME_FG="\033[38;2;176;196;222m"       # Light Steel Blue
+export THEME_RESET="\033[0m"

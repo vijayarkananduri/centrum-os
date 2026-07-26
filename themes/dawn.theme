@@ -1,0 +1,11 @@
+# Centrum OS — Dawn Theme
+# Warm, gentle, encouraging
+# Primary: Chocolate Brown (#D2691E)
+# Secondary: Dark Brown (#8B4513)
+# Background: Beige (#F5F5DC)
+
+export THEME_PRIMARY="\033[38;2;210;105;30m"   # Chocolate
+export THEME_SECONDARY="\033[38;2;139;69;19m" # Brown
+export THEME_BG="\033[48;2;245;245;220m"       # Beige
+export THEME_FG="\033[38;2;101;67;33m"         # Dark brown
+export THEME_RESET="\033[0m"

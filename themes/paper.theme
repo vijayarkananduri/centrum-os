@@ -1,0 +1,11 @@
+# Centrum OS — Paper Theme
+# Clean, reading/writing focused
+# Primary: Dark Slate Gray (#2F4F4F)
+# Secondary: Dim Gray (#696969)
+# Background: Light beige (#FAF0E6)
+
+export THEME_PRIMARY="\033[38;2;47;79;79m"    # Dark Slate Gray
+export THEME_SECONDARY="\033[38;2;105;105;105m" # Dim Gray
+export THEME_BG="\033[48;2;250;240;230m"       # Floral White
+export THEME_FG="\033[38;2;0;0;0m"             # Black
+export THEME_RESET="\033[0m"
