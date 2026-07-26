@@ -1,0 +1,40 @@
+#!/bin/bash
+
+################################################################################
+# .bashrc for Centrum OS
+# Loaded for interactive login shells
+################################################################################
+
+# Colors
+COLOR_ORANGE='\033[38;2;255;102;0m'
+COLOR_GREEN='\033[38;2;0;255;65m'
+COLOR_RESET='\033[0m'
+
+# Prompt
+export PS1="${COLOR_ORANGE}[centrum]${COLOR_RESET} \u@\h \w \\$ "
+
+# Path
+export PATH="$HOME/.local/bin:/opt/centrum:$PATH"
+
+# Aliases
+alias ll='ls -lah'
+alias la='ls -la'
+alias l='ls -lh'
+alias clear='clear && centrum greet'
+alias today='centrum status'
+alias work='centrum work'
+alias focus='centrum focus'
+alias agenda='centrum agenda'
+alias notes='cat ~/.centrum/memory/notes/$(date +%Y-%m-%d).md'
+
+# Functions
+centrum_help() {
+    centrum help
+}
+
+# Auto-greet on new session (optional)
+if [[ -z "$CENTRUM_GREETED" ]]; then
+    export CENTRUM_GREETED=1
+    # Uncomment to auto-greet on login
+    # centrum greet
+fi
