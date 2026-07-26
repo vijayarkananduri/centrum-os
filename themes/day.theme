@@ -1,0 +1,10 @@
+# Centrum OS — Day Theme
+# Bright, energetic, clear
+# Primary: Orange (#FF6600)
+# Secondary: Dark Gray (#333333)
+# Background: White (#FFFFFF)
+
+# ANSI escape sequences:
+# Primary: \033[38;2;255;102;0m
+# Secondary: \033[38;2;51;51;51m
+# Background: \033[48;2;255;255;255m

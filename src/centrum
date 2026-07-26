@@ -1,0 +1,201 @@
+#!/bin/bash
+
+################################################################################
+#
+# CENTRUM COMMANDER
+# Main entry point for Centrum OS
+# Version: 0.1-beta
+#
+################################################################################
+
+set -e
+
+# Script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LIB_PATH="${HOME}/.local/lib/centrum"
+
+# Source libraries
+if [[ -f "$LIB_PATH/lib/ui.sh" ]]; then
+    source "$LIB_PATH/lib/ui.sh"
+fi
+
+if [[ -f "$LIB_PATH/lib/memory.sh" ]]; then
+    source "$LIB_PATH/lib/memory.sh"
+fi
+
+if [[ -f "$LIB_PATH/lib/config.sh" ]]; then
+    source "$LIB_PATH/lib/config.sh"
+fi
+
+if [[ -f "$LIB_PATH/lib/time.sh" ]]; then
+    source "$LIB_PATH/lib/time.sh"
+fi
+
+# Version
+VERSION="0.1-beta"
+
+################################################################################
+# HELP SYSTEM
+################################################################################
+
+show_help() {
+    cat << 'EOF'
+
+┌─────────────────────────────────────────┐
+│     CENTRUM OS v0.1 — Help System       │
+└─────────────────────────────────────────┘
+
+USAGE:
+    centrum [COMMAND] [ARGUMENTS]
+
+COMMANDS:
+    greet               Display greeting and daily overview
+    work [project]      Open specified project
+    focus [minutes]     Start timed focus session
+    agenda [add|list]   Manage daily tasks
+    yesterday           Show previous day report
+    news [source]       Fetch headlines (optional)
+    status              Display system stats
+    open [name]         Fuzzy open project or file
+    save "[note]"       Save quick note
+    theme [day|night]   Change color scheme
+    config [key] [val]  Modify preferences
+    help [command]      Show this help
+
+EXAMPLES:
+    centrum greet
+    centrum work web-scraper
+    centrum focus 45
+    centrum agenda add "Fix bug in auth module"
+    centrum save "Remember to test edge cases"
+    centrum theme night
+
+For detailed documentation, see PROJECT_CENTRUM_v1.0.md
+
+EOF
+}
+
+################################################################################
+# COMMAND ROUTER
+################################################################################
+
+main() {
+    local command="${1:-greet}"
+    shift || true
+
+    case "$command" in
+        greet)
+            if [[ -f "$LIB_PATH/modules/greet.sh" ]]; then
+                source "$LIB_PATH/modules/greet.sh"
+                greet_main "$@"
+            else
+                echo "Error: greet module not found"
+                exit 1
+            fi
+            ;;
+        work)
+            if [[ -f "$LIB_PATH/modules/work.sh" ]]; then
+                source "$LIB_PATH/modules/work.sh"
+                work_main "$@"
+            else
+                echo "Error: work module not found"
+                exit 1
+            fi
+            ;;
+        focus)
+            if [[ -f "$LIB_PATH/modules/focus.sh" ]]; then
+                source "$LIB_PATH/modules/focus.sh"
+                focus_main "$@"
+            else
+                echo "Error: focus module not found"
+                exit 1
+            fi
+            ;;
+        agenda)
+            if [[ -f "$LIB_PATH/modules/agenda.sh" ]]; then
+                source "$LIB_PATH/modules/agenda.sh"
+                agenda_main "$@"
+            else
+                echo "Error: agenda module not found"
+                exit 1
+            fi
+            ;;
+        yesterday)
+            if [[ -f "$LIB_PATH/modules/yesterday.sh" ]]; then
+                source "$LIB_PATH/modules/yesterday.sh"
+                yesterday_main "$@"
+            else
+                echo "Error: yesterday module not found"
+                exit 1
+            fi
+            ;;
+        news)
+            if [[ -f "$LIB_PATH/modules/news.sh" ]]; then
+                source "$LIB_PATH/modules/news.sh"
+                news_main "$@"
+            else
+                echo "Error: news module not found"
+                exit 1
+            fi
+            ;;
+        status)
+            if [[ -f "$LIB_PATH/modules/status.sh" ]]; then
+                source "$LIB_PATH/modules/status.sh"
+                status_main "$@"
+            else
+                echo "Error: status module not found"
+                exit 1
+            fi
+            ;;
+        open)
+            if [[ -f "$LIB_PATH/modules/open.sh" ]]; then
+                source "$LIB_PATH/modules/open.sh"
+                open_main "$@"
+            else
+                echo "Error: open module not found"
+                exit 1
+            fi
+            ;;
+        save)
+            if [[ -f "$LIB_PATH/modules/save.sh" ]]; then
+                source "$LIB_PATH/modules/save.sh"
+                save_main "$@"
+            else
+                echo "Error: save module not found"
+                exit 1
+            fi
+            ;;
+        theme)
+            if [[ -f "$LIB_PATH/modules/theme.sh" ]]; then
+                source "$LIB_PATH/modules/theme.sh"
+                theme_main "$@"
+            else
+                echo "Error: theme module not found"
+                exit 1
+            fi
+            ;;
+        config)
+            if [[ -f "$LIB_PATH/modules/config.sh" ]]; then
+                source "$LIB_PATH/modules/config.sh"
+                config_main "$@"
+            else
+                echo "Error: config module not found"
+                exit 1
+            fi
+            ;;
+        help)
+            show_help
+            ;;
+        --version|-v)
+            echo "Centrum OS v$VERSION"
+            ;;
+        *)
+            echo "Unknown command: $command"
+            echo "Use 'centrum help' for usage information"
+            exit 2
+            ;;
+    esac
+}
+
+# Run main
+main "$@"

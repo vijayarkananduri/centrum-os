@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+venv/
+*.egg-info/
+
+# Build artifacts
+*.iso
+*.img
+*.tar.gz
+build/work/
+build/alpine-iso/
+
+# User data (never commit)
+~/.centrum/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage

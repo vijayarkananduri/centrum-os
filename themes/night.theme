@@ -1,0 +1,10 @@
+# Centrum OS — Night Theme
+# Dark, focused, hacker
+# Primary: Green (#00FF41)
+# Secondary: Blue (#0088FF)
+# Background: Black (#0A0A0A)
+
+# ANSI escape sequences:
+# Primary: \033[38;2;0;255;65m
+# Secondary: \033[38;2;0;136;255m
+# Background: \033[48;2;10;10;10m
