@@ -1,5 +1,5 @@
 ```
-                                                                                                           .         .           
+                                                                                                                           
                                                                                            
                                                                                           
                                       ,d                                                  
@@ -12,16 +12,8 @@ a8"     ""  a8P_____88  88P'   `"8a   88     88P'   "Y8  88       88  88P'   "88
                                                                                           
                                                                                           
                                                                             
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                                                   
-                                                                                                   
-
-         Personal Terminal Operating System
-              v0.1-beta | "Return to focus."
+                          Personal Terminal Operating System
+                           " v0.1-beta | "Return to focus."
 ```
 
 ---
