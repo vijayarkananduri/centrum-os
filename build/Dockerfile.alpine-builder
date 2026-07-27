@@ -1,0 +1,21 @@
+# Alpine Linux + Centrum OS Bootable ISO Build Environment
+FROM alpine:3.19
+
+RUN apk add --no-cache \
+    bash \
+    curl \
+    git \
+    cdrkit \
+    alpine-sdk \
+    abuild \
+    mtools \
+    syslinux
+
+WORKDIR /build
+COPY . .
+
+RUN chmod +x build/*.sh
+
+VOLUME /build/output
+
+CMD ["bash", "build/build-complete-iso.sh"]
