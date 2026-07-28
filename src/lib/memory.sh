@@ -14,10 +14,12 @@ MEMORY_DIR="${HOME}/.centrum/memory"
 ################################################################################
 
 memory_init() {
-    mkdir -p "$MEMORY_DIR"/{notes}
-    touch "$MEMORY_DIR"/today.log
-    touch "$MEMORY_DIR"/projects.index
-    [[ ! -f "$MEMORY_DIR"/agenda.md ]] && echo "# Agenda — $(date +%Y-%m-%d)" > "$MEMORY_DIR"/agenda.md
+    mkdir -p "$MEMORY_DIR/notes"
+    touch "$MEMORY_DIR/today.log"
+    touch "$MEMORY_DIR/projects.index"
+    if [[ ! -f "$MEMORY_DIR/agenda.md" ]]; then
+        echo "# Agenda — $(date +%Y-%m-%d)" > "$MEMORY_DIR/agenda.md"
+    fi
 }
 
 ################################################################################
@@ -32,7 +34,7 @@ memory_log() {
     local timestamp=$(date -Iseconds)
     local entry="${timestamp}|${category}|${description}|${metadata}"
     
-    echo "$entry" >> "$MEMORY_DIR"/today.log
+    echo "$entry" >> "$MEMORY_DIR/today.log"
 }
 
 ################################################################################
@@ -40,7 +42,7 @@ memory_log() {
 ################################################################################
 
 memory_today() {
-    cat "$MEMORY_DIR"/today.log
+    cat "$MEMORY_DIR/today.log"
 }
 
 ################################################################################
@@ -48,7 +50,7 @@ memory_today() {
 ################################################################################
 
 memory_yesterday() {
-    cat "$MEMORY_DIR"/yesterday.log 2>/dev/null || echo ""
+    cat "$MEMORY_DIR/yesterday.log" 2>/dev/null || echo ""
 }
 
 ################################################################################
@@ -56,7 +58,7 @@ memory_yesterday() {
 ################################################################################
 
 memory_last_activity() {
-    tail -1 "$MEMORY_DIR"/today.log 2>/dev/null || echo ""
+    tail -1 "$MEMORY_DIR/today.log" 2>/dev/null || echo ""
 }
 
 ################################################################################
@@ -64,7 +66,7 @@ memory_last_activity() {
 ################################################################################
 
 memory_get_projects() {
-    cat "$MEMORY_DIR"/projects.index 2>/dev/null || echo ""
+    cat "$MEMORY_DIR/projects.index" 2>/dev/null || echo ""
 }
 
 ################################################################################
@@ -79,7 +81,7 @@ memory_add_project() {
     local status="${3:-active}"
     
     local entry="${path}|${date}|${time}|${duration}|${status}"
-    echo "$entry" >> "$MEMORY_DIR"/projects.index
+    echo "$entry" >> "$MEMORY_DIR/projects.index"
 }
 
 ################################################################################
@@ -87,13 +89,13 @@ memory_add_project() {
 ################################################################################
 
 memory_rotate() {
-    cp "$MEMORY_DIR"/today.log "$MEMORY_DIR"/yesterday.log
-    echo "" > "$MEMORY_DIR"/today.log
+    cp "$MEMORY_DIR/today.log" "$MEMORY_DIR/yesterday.log"
+    echo "" > "$MEMORY_DIR/today.log"
     
     local today=$(date +%Y-%m-%d)
-    cp "$MEMORY_DIR"/agenda.md "$MEMORY_DIR"/notes/"${today}"-agenda.md
+    cp "$MEMORY_DIR/agenda.md" "$MEMORY_DIR/notes/""${today}"-agenda.md
     
-    echo "# Agenda — $(date +%Y-%m-%d)" > "$MEMORY_DIR"/agenda.md
+    echo "# Agenda — $(date +%Y-%m-%d)" > "$MEMORY_DIR/agenda.md"
     
     memory_log "SESSION" "Log rotation at midnight" "automatic"
 }
@@ -103,7 +105,7 @@ memory_rotate() {
 ################################################################################
 
 memory_get_agenda() {
-    cat "$MEMORY_DIR"/agenda.md 2>/dev/null || echo ""
+    cat "$MEMORY_DIR/agenda.md" 2>/dev/null || echo ""
 }
 
 ################################################################################
@@ -112,7 +114,7 @@ memory_get_agenda() {
 
 memory_add_agenda() {
     local task="$1"
-    echo "- [ ] $task" >> "$MEMORY_DIR"/agenda.md
+    echo "- [ ] $task" >> "$MEMORY_DIR/agenda.md"
 }
 
 ################################################################################
@@ -121,7 +123,7 @@ memory_add_agenda() {
 
 memory_done_agenda() {
     local line_num="$1"
-    local agenda_file="$MEMORY_DIR"/agenda.md
+    local agenda_file="$MEMORY_DIR/agenda.md"
     
     sed -i "${line_num}s/\[ \]/[x]/" "$agenda_file"
 }
@@ -135,7 +137,7 @@ memory_save_note() {
     local today=$(date +%Y-%m-%d)
     local timestamp=$(date +%H:%M)
     
-    echo "[$timestamp] $note" >> "$MEMORY_DIR"/notes/"${today}".md
+    echo "[$timestamp] $note" >> "$MEMORY_DIR/notes/""${today}".md
 }
 
 memory_init
