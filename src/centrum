@@ -165,6 +165,15 @@ main() {
                 exit 1
             fi
             ;;
+       notes)
+            if [[ -f "$LIB_PATH/modules/notes.sh" ]]; then
+                source "$LIB_PATH/modules/notes.sh"
+                notes_main "$@"
+            else
+                echo "Error: notes module not found"
+                exit 1
+            fi
+            ;;
         theme)
             if [[ -f "$LIB_PATH/modules/theme.sh" ]]; then
                 source "$LIB_PATH/modules/theme.sh"
